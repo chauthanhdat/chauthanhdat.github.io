@@ -74,27 +74,28 @@
           <h2 class="heading-portfolio-single-h2 text-black">Block Mansion</h2>
 
           <!-- IMAGE / VIDEO GALLERY -->
-          <div class="row mb-5">
-            <div class="col-12 mb-4">
-              <div class="owl-carousel single-slider">
-                <!-- Replace src with your actual screenshots -->
-                <figure class="mb-4">
-                  <img src="images/block-mansion-1.jpg" alt="Block Mansion – screenshot 1" class="img-fluid">
-                </figure>
-                <figure class="mb-4">
-                  <img src="images/block-mansion-2.jpg" alt="Block Mansion – screenshot 2" class="img-fluid">
-                </figure>
-              </div>
+          <div class="mb-5 d-flex justify-content-center align-items-start" style="gap: 8px;">
+            <div style="flex: 1 1 0; min-width: 0;">
+              <!-- Video: visuals from video-2, audio synced from video-1 -->
+              <video id="block-mansion-video" style="width: 100%; height: auto; display: block;" controls playsinline>
+                <source src="media/block-mansion/block-mansion-video-2.mp4" type="video/mp4">
+              </video>
+              <audio id="block-mansion-audio">
+                <source src="media/block-mansion/block-mansion-video-1.mp4" type="video/mp4">
+              </audio>
             </div>
-
-            <!-- VIDEO PLACEHOLDER -->
-            <!--
-            <div class="col-12 mb-5">
-              <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
-              </div>
+            <div style="flex: 1 1 0; min-width: 0;">
+              <img src="media/block-mansion/block-mansion-1.webp" alt="Block Mansion – screenshot 1" style="width: 100%; height: auto; display: block;">
             </div>
-            -->
+            <div style="flex: 1 1 0; min-width: 0;">
+              <img src="media/block-mansion/block-mansion-2.webp" alt="Block Mansion – screenshot 2" style="width: 100%; height: auto; display: block;">
+            </div>
+            <div style="flex: 1 1 0; min-width: 0;">
+              <img src="media/block-mansion/block-mansion-3.webp" alt="Block Mansion – screenshot 3" style="width: 100%; height: auto; display: block;">
+            </div>
+            <div style="flex: 1 1 0; min-width: 0;">
+              <img src="media/block-mansion/block-mansion-4.webp" alt="Block Mansion – screenshot 4" style="width: 100%; height: auto; display: block;">
+            </div>
           </div>
 
           <!-- METADATA ROW -->
@@ -249,6 +250,19 @@
   <script src="js/ScrollMagic.min.js"></script>
   <script src="js/scrollmagic.animation.gsap.min.js"></script>
   <script src="js/custom.js"></script>
+
+  <script>
+    (function () {
+      var video = document.getElementById('block-mansion-video');
+      var audio = document.getElementById('block-mansion-audio');
+      if (!video || !audio) return;
+
+      video.addEventListener('play', function () { audio.currentTime = video.currentTime; audio.play(); });
+      video.addEventListener('pause', function () { audio.pause(); });
+      video.addEventListener('seeked', function () { audio.currentTime = video.currentTime; });
+      video.addEventListener('ended', function () { audio.pause(); audio.currentTime = 0; });
+    })();
+  </script>
 
 </body>
 
