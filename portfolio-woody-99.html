@@ -77,8 +77,8 @@
           <div class="mb-5 d-flex justify-content-center align-items-start" style="gap: 8px;">
             <div style="flex: 1 1 0; min-width: 0;">
               <!-- Video: visuals from video-2, audio synced from video-1 -->
-              <video id="woody-video" style="width: 100%; height: auto; display: block;" controls playsinline>
-                <source src="media/woody-99/woody-99-video-2.mp4" type="video/mp4">
+              <video id="woody-video" style="width: 100%; height: auto; display: block;" controls playsinline autoplay muted loop>
+                <source src="media/woody-99/woody-99-video-2.mp4#t=0.001" type="video/mp4">
               </video>
               <audio id="woody-audio">
                 <source src="media/woody-99/woody-99-video-1.mp4" type="video/mp4">
@@ -258,10 +258,14 @@
       var audio = document.getElementById('woody-audio');
       if (!video || !audio) return;
 
+      var lastTime = 0;
       video.addEventListener('play', function () { audio.currentTime = video.currentTime; audio.play(); });
       video.addEventListener('pause', function () { audio.pause(); });
       video.addEventListener('seeked', function () { audio.currentTime = video.currentTime; });
-      video.addEventListener('ended', function () { audio.pause(); audio.currentTime = 0; });
+      video.addEventListener('timeupdate', function () {
+        if (video.currentTime < lastTime - 0.5) { audio.currentTime = 0; if (!video.paused) audio.play(); }
+        lastTime = video.currentTime;
+      });
     })();
   </script>
 
