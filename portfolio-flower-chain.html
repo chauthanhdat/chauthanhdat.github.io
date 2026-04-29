@@ -78,7 +78,7 @@
             <div id="flower-chain-video-wrap" style="flex: none; position: relative;">
               <iframe
                 id="flower-chain-yt"
-                src="https://youtube.com/embed/DtpKd9XZFRs"
+                src="https://youtube.com/embed/DtpKd9XZFRs?autoplay=1&loop=1&playlist=DtpKd9XZFRs&mute=1"
                 title="Flower Chain gameplay"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
@@ -260,12 +260,16 @@
         var wrap = document.getElementById('flower-chain-video-wrap');
         if (!img || !wrap) return;
         var h = img.offsetHeight;
+        if (h === 0) return;
         wrap.style.height = h + 'px';
         wrap.style.width = (h * VIDEO_RATIO) + 'px';
       }
-      if (document.readyState === 'complete') { syncVideoSize(); }
-      else { window.addEventListener('load', syncVideoSize); }
+      window.addEventListener('load', syncVideoSize);
       window.addEventListener('resize', syncVideoSize);
+      if (window.ResizeObserver) {
+        var img = document.getElementById('flower-chain-img1');
+        if (img) new ResizeObserver(syncVideoSize).observe(img);
+      }
     })();
   </script>
 
